@@ -1,0 +1,49 @@
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="adminorders" extends="struts-default" namespace="/admin">
+    	<action name="ordersList" class="ordersAction" method="list">
+    		<param name="ftlFileName">ordersList.ftl</param>
+    	</action>
+    	<action name="termList" class="ordersAction" method="termList">
+    		<param name="ftlFileName">termList.ftl</param>
+    	</action>
+    	<action name="ordersSave" class="ordersAction" method="save">
+    	</action>
+    	<action name="ordersEdit" class="ordersAction" method="info">
+    		<param name="ftlFileName">ordersEdit.ftl</param>
+    	</action>
+    	<action name="fortunaShow" class="ordersAction" method = "fortunaShow"></action>
+    	<action name="termSettle" class="ordersAction" method = "termSettle"></action>
+    	<action name="termEnd" class="ordersAction" method = "termEnd"></action>
+    	<action name="insertNew" class="ordersAction" method = "insertNew"></action>
+    	<action name="fortunaPublish" class="ordersAction" method="fortunaPublish"></action>
+    	<action name="ordersUpdate" class="ordersAction" method="update">
+    	</action>
+    	<action name="ordersDelete" class="ordersAction" method="delete">
+    	</action>
+	</package>
+	<package name="ordersUsers" extends="struts-default" namespace="/user">
+    	<action name="cart" class="ordersAction" method="add">
+    	</action>
+    	<action name="ordersSave" class="ordersAction" method="save">
+    	</action>
+    	<action name="ordersSaveBC" class="ordersAction" method="saveBC">
+    	</action>
+    	<action name="settle" class="ordersAction" method="settle">
+    	</action>
+    	<action name="ordersPay" class="ordersAction" method="pay">
+    	</action>
+    	<action name="ordersDetail" class="ordersAction" method="detail">
+    	</action>
+    	<action name="ordersList" class="ordersAction" method="indexList">
+    	</action>
+    	<action name="termList" class="ordersAction" method="termListUser"></action>
+	</package>
+	<package name="ordersIndex" extends="struts-default" namespace="/">
+    	<action name="ordersPay" class="ordersAction" method="pay">
+    	</action>
+	</package>
+</struts>  

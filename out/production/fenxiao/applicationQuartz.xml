@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+           http://www.springframework.org/schema/aop  
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+           http://www.springframework.org/schema/tx  
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- 配置定时触发器 -->
+	<!-- 定义目标bean和bean中的方法 -->
+	<bean id="TriggerAction" class="com.hansan.fenxiao.action.TriggerAction" />
+	<bean id="toEndSale"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="TriggerAction" />
+		</property>
+		<property name="targetMethod">  <!-- 要执行的方法名称 -->
+			<value>endSale</value>
+		</property>
+	</bean>
+	<bean id="toStartSale"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="TriggerAction" />
+		</property>
+		<property name="targetMethod">  <!-- 要执行的方法名称 -->
+			<value>startSale</value>
+		</property>
+	</bean>
+	<bean id="toSettle"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="TriggerAction" />
+		</property>
+		<property name="targetMethod">  <!-- 要执行的方法名称 -->
+			<value>settle</value>
+		</property>
+	</bean>
+	<bean id="toSetFortuna"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="TriggerAction" />
+		</property>
+		<property name="targetMethod">  <!-- 要执行的方法名称 -->
+			<value>setFortuna</value>
+		</property>
+	</bean>
+
+	<!-- ======================== 调度触发器 ======================== -->
+	<bean id="EndTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="toEndSale"></property>
+		<property name="cronExpression" value="0 25 21 * * ?"></property>
+	</bean>
+	<bean id="StartTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="toStartSale"></property>
+		<property name="cronExpression" value="0 59 23 * * ?"></property>
+	</bean>
+	<bean id="SettleTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="toSettle"></property>
+		<property name="cronExpression" value="0 15 22 * * ?"></property>
+	</bean>
+	<bean id="SetFortunaTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="toSetFortuna"></property>
+		<property name="cronExpression" value="0 30 21 * * ?"></property>
+	</bean>
+	
+
+	<!-- ======================== 调度工厂 ======================== -->
+	<bean id="SpringJobSchedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="EndTriggerBean" />
+				<ref bean="StartTriggerBean" />
+				<ref bean="SettleTriggerBean" />
+				<ref bean="SetFortunaTriggerBean" />
+			</list>
+		</property>
+	</bean>
+</beans>  

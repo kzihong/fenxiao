@@ -1,0 +1,29 @@
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="cartItemAction" extends="struts-default" namespace="/cart">
+    	<action name="list" class="cartItemAction" method="getCartItems">
+    	</action>
+    	<action name="number" class="cartItemAction" method="getCartItemQuantity">
+    	</action>
+    	<action name="update" class="cartItemAction" method="updateCartItem">
+    	</action>
+    	<action name="cartP" class="cartItemAction" method="getCartItemById">
+    	</action>
+    	<action name="delete" class="cartItemAction" method="delete">
+    	</action>
+    	<action name="addByCid" class="cartItemAction" method="addByCid"></action>
+    	<action name="updateByCid" class="cartItemAction" method="updateByCid"></action>
+    	<action name="reduceByCid" class="cartItemAction" method="reduceByCid"></action>
+    	<action name="add" class="cartItemAction" method="addCartItem"></action>
+    	<action name="reduce" class="cartItemAction" method="reduceCartItem"></action>
+    	<action name="update" class="cartItemAction" method="updateCartItem"></action>
+    	<action name="goCart" class="cartItemAction" method="goCart"></action>
+    	<action name="empty" method="empty" class="cartItemAction"></action>
+    	<action name="addMulti" method = "addMulti" class="cartItemAction"></action>
+    	<action name="updateMulti" method = "updateMulti" class="cartItemAction"></action>
+    	<action name="reduceMulti" method = "reduceMulti" class="cartItemAction"></action>
+	</package>
+</struts>  
